@@ -80,3 +80,31 @@ sum(rate({__name__=~"collectd_disk_disk_ops_\\d_total",disk=~"vda\\d+"}[10m])) b
 ```promql
 sum(rate({__name__=~"collectd_disk_disk_octets_\\d_total",disk=~"vda\\d+"}[10m])) by (exported_instance, disk) > 0
 ```
+
+### Nginx
+
+#### Active Connections
+
+```promql
+collectd_nginx_nginx_connections{nginx!="waiting"}
+```
+
+### Requests per second
+
+```promql
+rate(collectd_nginx_nginx_requests_total[2m])
+```
+
+### Apache
+
+### Active Workers
+
+```promql
+collectd_apache_apache_scoreboard{type!="open"} > 0
+```
+
+### Requests per second
+
+```promql
+rate(collectd_apache_apache_requests_total[2m])
+```
